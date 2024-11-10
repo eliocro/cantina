@@ -1,9 +1,9 @@
 function App() {
   return (
     <>
-     Star Wars Cantina
+      <h1>Star Wars Cantina</h1>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
