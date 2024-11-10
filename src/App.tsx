@@ -1,25 +1,18 @@
-import { useState } from 'react';
-
 import useSearch from './hooks/useSearch';
+import useSearchParams from './hooks/useSearchParams';
 
 import CharacterTable from './components/CharacterTable';
 import SearchField from './components/SearchField';
 import Pagination from './components/Pagination';
 
 function App() {
-  const [page, setPage] = useState(1);
-  const [text, setText] = useState('');
+  const { text, page, setText, setPage } = useSearchParams();
   const { data, count } = useSearch({ text, page });
-
-  const onSubmit = (val: string) => {
-    setText(val);
-    setPage(1);
-  };
 
   return (
     <>
       <h1>Star Wars Cantina</h1>
-      <SearchField onSubmit={onSubmit} />
+      <SearchField initial={text} onSubmit={setText} />
       <CharacterTable items={data} />
       <Pagination count={count} page={page} setPage={setPage} />
     </>

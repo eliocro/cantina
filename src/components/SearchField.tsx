@@ -1,10 +1,17 @@
-import { FormEventHandler, useId, useState } from 'react';
+import { FormEventHandler, useEffect, useId, useState } from 'react';
 
-type Props = { onSubmit: (val: string) => void };
+type Props = {
+  initial: string;
+  onSubmit: (val: string) => void;
+};
 
-export default function SearchField({ onSubmit }: Props) {
+export default function SearchField({ initial, onSubmit }: Props) {
   const id = useId();
   const [value, setValue] = useState('');
+
+  useEffect(() => {
+    if (initial !== value) setValue(initial);
+  }, [initial]);
 
   const onFormSubmit: FormEventHandler<HTMLFormElement> = evt => {
     evt.preventDefault();
