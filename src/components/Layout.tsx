@@ -21,6 +21,7 @@ const StyledDiv = styled.div`
 
   background-color: #000;
   background-image: url(/stars.jpg);
+  background-size: cover;
 
   > header,
   main {

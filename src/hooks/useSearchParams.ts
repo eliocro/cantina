@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 type Params = { text: string; page: number };
 
 export default function useSearchParams() {
-  const [params, setParams] = useState<Params>(getParams);
+  const [params, setParams] = useState(getParams);
 
   useEffect(() => {
-    const onPop = (evt: PopStateEvent) => setParams(evt.state);
-    addEventListener('popstate', onPop);
-    return () => removeEventListener('popstate', onPop);
+    const onPop = (evt: PopStateEvent) => setParams(evt.state || getParams());
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
   }, []);
 
   const push = (state: Params) => {
@@ -38,6 +38,7 @@ function buildQuery({ text, page }: Params) {
   const params = new URLSearchParams();
   if (text) params.set('text', text);
   if (page !== 1) params.set('page', page.toString());
+
   const query = params.toString();
   return query ? `?${query}` : '';
 }

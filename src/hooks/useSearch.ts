@@ -13,7 +13,7 @@ type Options = { text?: string; page?: number };
 
 export default function useSearch({ text, page }: Options) {
   const [isLoading, setIsLoading] = useState(false);
-  const [data, setData] = useState<Character[]>([]);
+  const [results, setResults] = useState<Character[]>([]);
   const [count, setCount] = useState(0);
   const [error, setError] = useState<Error | null>(null);
 
@@ -21,19 +21,19 @@ export default function useSearch({ text, page }: Options) {
     setIsLoading(true);
     fetchCharacters(text, page)
       .then(res => {
-        setData(res.results);
+        setResults(res.results);
         setCount(res.count);
         setError(null);
       })
       .catch(err => {
         setError(err);
-        setData([]);
+        setResults([]);
         setCount(0);
       })
       .finally(() => setIsLoading(false));
   }, [text, page]);
 
-  return { data, count, isLoading, error, isError: !!error };
+  return { results, count, isLoading, error, isError: !!error };
 }
 
 async function fetchCharacters(text?: string, page?: number) {
