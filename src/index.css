@@ -1,6 +1,8 @@
 :root {
   --fg: #f5f5f5;
   --bg: #1d1e1f;
+  --color-input: #000;
+  --color-border: #555;
 
   color-scheme: light dark;
   color: var(--fg);
@@ -44,5 +46,7 @@ h1 {
   :root {
     --fg: #222;
     --bg: #f5f5f5;
+    --color-input: #fff;
+    --color-border: #999;
   }
 }

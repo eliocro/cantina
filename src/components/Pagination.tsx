@@ -1,6 +1,12 @@
+import styled from 'styled-components';
+
 const LIMIT = 10;
 
-type Props = { count: number; page: number; setPage: (val: number) => void };
+type Props = {
+  count: number;
+  page: number;
+  setPage: (val: number) => void;
+};
 
 export default function Pagination({ count, page, setPage }: Props) {
   if (!count) return null;
@@ -9,7 +15,7 @@ export default function Pagination({ count, page, setPage }: Props) {
   const pages = Array.from(new Array(total)).map((_, i) => i + 1);
 
   return (
-    <nav>
+    <StyledNav>
       <ul>
         {pages.map(p => (
           <li key={p}>
@@ -21,6 +27,42 @@ export default function Pagination({ count, page, setPage }: Props) {
           </li>
         ))}
       </ul>
-    </nav>
+    </StyledNav>
   );
 }
+
+const StyledNav = styled.nav`
+  margin-top: 2rem;
+
+  ul {
+    display: flex;
+    gap: 0.25rem;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  span,
+  button {
+    display: block;
+    padding: 0.5rem;
+    border: 1px solid var(--fg);
+
+    font-size: 1rem;
+    line-height: 1;
+  }
+  span {
+    color: var(--bg);
+    background-color: var(--fg);
+  }
+  button {
+    cursor: pointer;
+    background-color: transparent;
+
+    &:hover {
+      color: var(--bg);
+      background-color: var(--fg);
+    }
+  }
+`;
