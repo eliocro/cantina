@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { getCache, setCache } from '../utils/cache';
 
 const API_ENDPOINT = 'https://swapi.dev/api';
+const PAGE_LIMIT = 10;
 
 export type Character = {
   name: string;
@@ -33,7 +35,14 @@ export default function useSearch({ text, page }: Options) {
       .finally(() => setIsLoading(false));
   }, [text, page]);
 
-  return { results, count, isLoading, error, isError: !!error };
+  return {
+    results,
+    count,
+    limit: PAGE_LIMIT,
+    isLoading,
+    error,
+    isError: !!error,
+  };
 }
 
 async function fetchCharacters(text?: string, page?: number) {
@@ -41,10 +50,17 @@ async function fetchCharacters(text?: string, page?: number) {
   if (text) url.searchParams.set('search', text);
   if (page) url.searchParams.set('page', page.toString());
 
-  const res = await fetch(url.toString());
+  const uri = url.toString();
+  const cache = getCache(uri);
+  if (cache) return cache;
+
+  const res = await fetch(uri);
   if (!res.ok) {
     const data = await res.json();
     throw new Error(`${res.status} - ${data.detail}`);
   }
-  return res.json();
+  const data = await res.json();
+
+  setCache(uri, data);
+  return data;
 }

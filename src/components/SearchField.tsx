@@ -4,9 +4,10 @@ import styled from 'styled-components';
 type Props = {
   initial: string;
   onSubmit: (val: string) => void;
+  disabled?: boolean;
 };
 
-export default function SearchField({ initial, onSubmit }: Props) {
+export default function SearchField({ initial, onSubmit, disabled }: Props) {
   const id = useId();
   const [value, setValue] = useState('');
 
@@ -24,12 +25,14 @@ export default function SearchField({ initial, onSubmit }: Props) {
       <label htmlFor={id}>Search</label>
       <input
         id={id}
-        type="search"
+        type="text"
         value={value}
         onChange={evt => setValue(evt.target.value)}
         placeholder="Use the Force, Luke..."
       />
-      <button type="submit">Search</button>
+      <button type="submit" disabled={disabled}>
+        Search
+      </button>
     </StyledForm>
   );
 }
@@ -76,6 +79,9 @@ const StyledForm = styled.form`
 
     &:focus-visible {
       outline-offset: 4px;
+    }
+    &:disabled {
+      opacity: 0.8;
     }
   }
 `;

@@ -12,12 +12,12 @@ import ErrorView from './components/ErrorView';
 
 function App() {
   const { text, page, setText, setPage } = useSearchParams();
-  const { results, count, isLoading, error } = useSearch({ text, page });
+  const { results, count, limit, isLoading, error } = useSearch({ text, page });
 
   return (
     <Layout>
       <h1>Character Search {isLoading && <Spinner />}</h1>
-      <SearchField initial={text} onSubmit={setText} />
+      <SearchField initial={text} onSubmit={setText} disabled={isLoading} />
 
       {error && <ErrorView err={error} />}
       {!error &&
@@ -29,7 +29,7 @@ function App() {
         ))}
 
       <CharacterTable items={results} />
-      <Pagination count={count} page={page} setPage={setPage} />
+      <Pagination count={count} limit={limit} page={page} setPage={setPage} />
     </Layout>
   );
 }
