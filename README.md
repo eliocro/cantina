@@ -1,50 +1,48 @@
-# React + TypeScript + Vite
+# SW Cantina - Search characters
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a minimal Vite project setup for React.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Before you begin, make sure your development environment includes Node.js and an NPM compatible package manager.
 
-## Expanding the ESLint configuration
+- Node.js: You need to install Node.js. See the [Node.js Website](https://nodejs.org/) to download and install.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Installation
 
-- Configure the top-level `parserOptions` property like this:
+First, you will need to clone the repo on your local machine. Open your terminal and type:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+git clone https://github.com/eliocro/cantina.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+After cloning the repo, you have to install the dependencies. You can do this by moving into the project folder and running `npm install`:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+cd cantina
+npm install
 ```
+
+## Running the application
+
+To start the development server, run:
+
+```bash
+npm run dev
+```
+
+This command will start up the development server. Then you can open your web browser to `http://localhost:5173`.
+
+## Building the application
+
+If you want to build the production version of the app, run:
+
+```bash
+npm run build
+```
+
+This command will create a `dist` folder with the compiled project. You can open `dist/index.html` to see the app.
+
+## Demo application
+
+The demo application is currently running on Vercel at https://sw-cantina.vercel.app/ .
