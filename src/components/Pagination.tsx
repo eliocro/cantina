@@ -58,6 +58,7 @@ const StyledNav = styled.nav`
   button {
     cursor: pointer;
     background-color: transparent;
+    color: var(--fg);
 
     &:hover {
       color: var(--bg);

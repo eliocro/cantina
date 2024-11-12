@@ -16,7 +16,7 @@ function App() {
 
   return (
     <Layout>
-      <h1>Character Search {isLoading && <Spinner />}</h1>
+      <h1>Search characters {isLoading && <Spinner />}</h1>
       <SearchField initial={text} onSubmit={setText} disabled={isLoading} />
 
       {error && <ErrorView err={error} />}
